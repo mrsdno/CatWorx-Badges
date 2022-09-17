@@ -7,12 +7,13 @@ namespace CatWorx.BadgeMaker
 {
     class Program
     {
-        static void Main(string[] args)
+        async static Task Main(string[] args)
         {
             // This is our employee-getting code now 
             List<Employee> employees = GetEmployees();
            Util.PrintEmployees(employees);
             Util.MakeCSV(employees);
+            await Util.MakeBadges(employees);
         }
         static List<Employee> GetEmployees()
         {
