@@ -10,34 +10,44 @@ namespace CatWorx.BadgeMaker
         static void Main(string[] args)
         {
             // This is our employee-getting code now 
-            List<string> employees = GetEmployees();
+            List<Employee> employees = GetEmployees();
             PrintEmployees(employees);
         }
-        static List<string> GetEmployees()
+        static List<Employee> GetEmployees()
         {
             // I will return a List of strings
-            List<string> employees = new List<string>();
-            bool more = true;
-            while (more)
+            List<Employee> employees = new List<Employee>();
+
+            while (true)
             {
                 Console.WriteLine("Please enter a name: (leave empty to exit)");
-                string input = Console.ReadLine() ?? "";
-                if (input == "")
+                string firstName = Console.ReadLine() ?? "";
+                if (firstName == "")
                 {
-                    more = false;
+                    break;
                 }
-                Employee currentEmployee = new Employee();
-                employees.Add(input);
+
+                Console.WriteLine("Enter last name: ");
+                string lastName = Console.ReadLine() ?? "";
+
+                Console.WriteLine("Enter ID: ");
+                int id = Int32.Parse(Console.ReadLine() ?? "");
+
+                Console.WriteLine("Enter Photo URL: ");
+                string photoUrl = Console.ReadLine() ?? "";
+
+                Employee currentEmployee = new Employee(firstName, lastName, id, photoUrl);
+                employees.Add(currentEmployee);
                 
             }
             return employees;
         }
 
-        static void PrintEmployees(List<string> employees)
+        static void PrintEmployees(List<Employee> employees)
         {
             for (int i = 0; i < employees.Count; i++)
             {
-                Console.WriteLine(employees[i]);
+                Console.WriteLine(employees[i].GetFullName());
             }
         }
 
